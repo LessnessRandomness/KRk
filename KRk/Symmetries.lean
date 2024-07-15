@@ -242,46 +242,123 @@ theorem Thm {N} (P1 P2: Position N): SamePosition P1 P2 ↔ Normalize P1 = Norma
     . cases H
       simp
     . unfold Normalize
-
-      rw [NormalizeX_thm _ _ H]
+      rw [H]
+      rw [NormalizeXMirrorX]
     . unfold Normalize
-      rw [SwapNormalizeXAndNormalizeY P1, SwapNormalizeXAndNormalizeY P2]
-      rw [NormalizeY_thm _ _ H]
+      rw [H]
+      rw [SwapNormalizeXAndNormalizeY, SwapNormalizeXAndNormalizeY]
+      rw [NormalizeYMirrorY]
     . unfold Normalize
       rw [H]
       rw [SwapNormalizeXAndNormalizeY]
       rw [NormalizeYMirrorY]
       rw [<- SwapNormalizeXAndNormalizeY]
       rw [NormalizeXMirrorX]
-    . rw [H]
-      clear H P1
-      unfold Normalize
+    . unfold Normalize
+      rw [H]
+      clear H
       unfold NormalizeX
-      unfold NormalizeY
-      unfold NormalizeDiag
       split
       . split
-        . split
+        . unfold NormalizeY
+          split
           . split
-            . split
+            . apply NormalizeDiagMirrorDiag
+            . exfalso
+              unfold MirrorDiag at *
+              cases P2
+              simp at *
+              omega
+          . split
+            . exfalso
+              unfold MirrorDiag at *
+              cases P2
+              simp at *
+              omega
+            . exfalso
+              unfold MirrorDiag at *
+              cases P2
+              simp at *
+              omega
+        . unfold NormalizeY
+          split
+          . split
+            . exfalso
+              unfold MirrorDiag at *
+              unfold MirrorX at *
+              cases P2
+              simp at *
+              omega
+            . exfalso
+              unfold MirrorDiag at *
+              unfold MirrorX at *
+              cases P2
+              simp at *
+              omega
+          . split
+            . unfold MirrorDiag at *
+              unfold MirrorX at *
+              unfold MirrorY at *
+              cases P2
+              unfold NormalizeDiag
+              simp at *
+              split
               . split
-                . unfold MirrorDiag at *
-                  cases P2
-                  simp at *
-                  omega
                 . simp
-              . split
-                . unfold MirrorDiag at *
-                  unfold MirrorY at *
-                  cases P2
-                  simp at *
                   omega
-                . sorry
+                . unfold MirrorDiag
+                  simp
+              . unfold MirrorDiag
+                split
+                . simp
+                . simp
+                  omega
+            . exfalso
+              unfold MirrorX at *
+              unfold MirrorDiag at *
+              cases P2
+              simp at *
+              omega
+      . split
+        . unfold NormalizeY
+          split
+          . split
+            . exfalso
+              unfold MirrorDiag at *
+              unfold MirrorX at *
+              cases P2
+              simp at *
+              omega
+            . unfold MirrorDiag at *
+              unfold MirrorX at *
+              unfold MirrorY at *
+              cases P2
+              simp at *
+              unfold NormalizeDiag
+              unfold MirrorDiag
+              simp at *
+              split
+              . split
+                . simp at *
+                  omega
+                . simp at *
+              . split
+                . simp
+                . simp
+                  omega
+          . split
+            . exfalso
+              unfold MirrorDiag at *
+              unfold MirrorX at *
+              cases P2
+              simp at *
+
+              sorry
             . sorry
-          . sorry
         . sorry
-      . sorry
-    . sorry
+    . unfold Normalize
+      rw [H]
+      sorry
     . sorry
     . sorry
   . sorry
