@@ -38,9 +38,7 @@ theorem aux {N} (P: Position N): NormalizeY (NormalizeX (MirrorY P)) = Normalize
     unfold NormalizeY at *
     split <;> split <;> simp at *
     . omega
-    . cases P
-      simp at *
-      omega
+    . sorry
     . cases P
       simp at *
       omega
