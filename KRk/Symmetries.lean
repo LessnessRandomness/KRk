@@ -232,6 +232,51 @@ theorem NormalizeDiagTwice {N} (P: Position N): NormalizeDiag (NormalizeDiag P) 
       simp at *
       omega
 
+theorem Aux00 {N} (P: Position N):
+  NormalizeY (NormalizeX (MirrorDiag P)) = MirrorDiag (NormalizeY (NormalizeX P)) := by
+  unfold NormalizeX
+  split <;> split
+  . unfold MirrorDiag at *
+    simp at *
+    unfold NormalizeY
+    split <;> simp at *
+  . unfold MirrorDiag at *
+    simp at *
+    unfold NormalizeY
+    split <;> split <;> simp at *
+    . unfold MirrorX at *
+      simp at *
+      omega
+    . unfold MirrorX at *
+      unfold MirrorY at *
+      simp at *
+      omega
+    . unfold MirrorX at *
+      unfold MirrorY at *
+      simp at *
+    . unfold MirrorX at *
+      unfold MirrorY at *
+      simp at *
+      cases P
+      simp at *
+      omega
+  . unfold MirrorDiag at *
+    simp at *
+    unfold MirrorX at *
+    simp at *
+    unfold NormalizeY
+    simp at *
+    split <;> split <;> simp at *
+    . omega
+    . unfold MirrorY
+      simp at *
+
+      sorry
+    . sorry
+    . sorry
+  . sorry
+
+
 theorem Thm {N} (P1 P2: Position N): SamePosition P1 P2 ↔ Normalize P1 = Normalize P2 := by
   constructor
   . intro H
@@ -255,6 +300,7 @@ theorem Thm {N} (P1 P2: Position N): SamePosition P1 P2 ↔ Normalize P1 = Norma
     . unfold Normalize
       rw [H]
       clear H
+
       sorry
     . unfold Normalize
       rw [H]
