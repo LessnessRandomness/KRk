@@ -5,17 +5,16 @@ structure Position (N: Nat) where
   WRy: Nat
   BKx: Nat
   BKy: Nat
-  Turn: Nat
   DimensionCheck: WKx < N ∧ WKy < N ∧ WRx < N ∧ WRy < N ∧ BKx < N ∧ BKy < N
 
 def MirrorX {N} (P: Position N): Position N :=
-  Position.mk (N - 1 - P.WKx) P.WKy (N - 1 - P.WRx) P.WRy (N - 1 - P.BKx) P.BKy P.Turn
+  Position.mk (N - 1 - P.WKx) P.WKy (N - 1 - P.WRx) P.WRy (N - 1 - P.BKx) P.BKy
   (by cases P
       simp
       omega)
 
 def MirrorY {N} (P: Position N): Position N :=
-  Position.mk P.WKx (N - 1 - P.WKy) P.WRx (N - 1 - P.WRy) P.BKx (N - 1 - P.BKy) P.Turn
+  Position.mk P.WKx (N - 1 - P.WKy) P.WRx (N - 1 - P.WRy) P.BKx (N - 1 - P.BKy)
   (by cases P
       simp
       omega)
@@ -35,7 +34,6 @@ theorem aux {N} (P: Position N): NormalizeY (NormalizeX (MirrorY P)) = Normalize
   split <;> split <;> try simp at *
   . sorry
   . unfold MirrorY at *
-    simp at *
     unfold MirrorX at *
     unfold NormalizeY at *
     split <;> split <;> simp at *
