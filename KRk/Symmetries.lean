@@ -111,357 +111,6 @@ def NormalizeDiag {N} (P: Position N): Position N :=
 
 def Normalize {N} (P: Position N): Position N := NormalizeDiag (NormalizeY (NormalizeX P))
 
-theorem NormalizeXMirrorX {N} (P: Position N): NormalizeX (MirrorX P) = NormalizeX P := by
-  unfold NormalizeX
-  unfold MirrorX at *
-  split <;> split
-  . cases P
-    simp at *
-    omega
-  . cases P
-    simp at *
-  . cases P
-    simp at *
-    omega
-  . cases P
-    simp at *
-    omega
-
-theorem NormalizeYMirrorY {N} (P: Position N): NormalizeY (MirrorY P) = NormalizeY P := by
-  unfold NormalizeY
-  unfold MirrorY at *
-  split <;> split
-  . cases P
-    simp at *
-    omega
-  . cases P
-    simp at *
-  . cases P
-    simp at *
-    omega
-  . cases P
-    simp at *
-    omega
-
-theorem NormalizeDiagMirrorDiag {N} (P: Position N): NormalizeDiag (MirrorDiag P) = NormalizeDiag P := by
-  unfold NormalizeDiag
-  unfold MirrorDiag at *
-  split <;> split
-  . cases P
-    simp at *
-    omega
-  . cases P
-    simp at *
-  . cases P
-    simp at *
-  . cases P
-    simp at *
-    omega
-
--- Working around limitations of omega
-theorem SwapNormalizeXAndNormalizeY {N} (P: Position N): NormalizeY (NormalizeX P) = NormalizeX (NormalizeY P) := by
-  unfold NormalizeX
-  unfold NormalizeY
-  split <;> rename_i H
-  . split <;> rename_i H0
-    . rfl
-    . split <;> rename_i H1
-      . rfl
-      . exfalso
-        unfold MirrorY at H1; simp at *
-        obtain H | H := H
-        . obtain ⟨H1, H2⟩ := H1
-          clear H2 H0
-          omega
-        . obtain ⟨H1, H2⟩ := H1
-          obtain ⟨H3, H4⟩ := H0
-          obtain ⟨H, H0⟩ := H
-          clear H1
-          have H5 := H2 H
-          clear H2
-          obtain ⟨H5, H6⟩ := H5
-          obtain H0 | H0 := H0
-          . clear H H3 H4 H6
-            omega
-          . obtain ⟨H0, H1⟩ := H0
-            have H7 := H6 H0
-            clear H6 H3 H4 H H5 H0
-            omega
-  . split <;> rename_i H0
-    . split <;> rename_i H1
-      . rfl
-      . split <;> rename_i H2
-        . exfalso
-          unfold MirrorX at *
-          unfold MirrorY at *
-          simp at *
-          obtain H0 | H0 := H0
-          . obtain ⟨H3, H4⟩ := H1
-            clear H2 H H4
-            omega
-          . obtain H2 | H2 := H2
-            . obtain ⟨H3, H4⟩ := H
-              clear H0 H1 H4
-              omega
-            . obtain ⟨H3, H4⟩ := H0
-              obtain ⟨H5, H6⟩ := H2
-              obtain ⟨H7, H8⟩ := H
-              obtain ⟨H9, H10⟩ := H1
-              clear H9 H7
-              have H11 := H8 H5
-              clear H8
-              have H12 := H10 H3
-              clear H10
-              clear H3 H5
-              obtain ⟨H13, H14⟩ := H11
-              obtain ⟨H15, H16⟩ := H12
-              obtain H4 | H4 := H4
-              . clear H6 H13 H14 H16
-                omega
-              . obtain H6 | H6 := H6
-                . clear H14 H15 H16 H4
-                  omega
-                . obtain ⟨H17, H18⟩ := H4
-                  obtain ⟨H19, H20⟩ := H6
-                  clear H13 H15
-                  have H21 := H14 H19
-                  clear H14 H16 H17 H18 H19
-                  omega
-        . exfalso
-          unfold MirrorX at *
-          unfold MirrorY at *
-          simp at *
-          clear H2
-          obtain H0 | H0 := H0
-          . obtain ⟨H3, H4⟩ := H1
-            clear H H4
-            omega
-          . obtain ⟨H3, H4⟩ := H
-            obtain ⟨H5, H6⟩ := H1
-            obtain ⟨H7, H8⟩ := H0
-            have H11 := H6 H7; clear H6
-            clear H3 H5
-            obtain ⟨H12, H13⟩ := H11
-            obtain H8 | H8 := H8
-            . clear H4 H7 H13
-              omega
-            . obtain ⟨H14, H15⟩ := H8
-              have H16 := H13 H14; clear H13
-              clear H4 H7 H12 H14
-              omega
-    . unfold MirrorX at *
-      unfold MirrorY at *
-      simp at *
-      split <;> rename_i H1
-      . split <;> rename_i H2
-        . cases P
-          simp at *
-          obtain ⟨H3, H4⟩ := H
-          obtain ⟨H5, H6⟩ := H0
-          obtain H1 | H1 := H1
-          . clear H2 H3 H4 H6
-            exfalso
-            omega
-          . obtain H2 | H2 := H2
-            . clear H4 H5 H6 H1
-              exfalso
-              omega
-            . obtain ⟨H7, H8⟩ := H1
-              obtain ⟨H9, H10⟩ := H2
-              have H11 := H4 H9; clear H4
-              have H12 := H6 H7; clear H6
-              clear H3 H5
-              obtain ⟨H13, H14⟩ := H11
-              obtain ⟨H15, H16⟩ := H12
-              obtain H8 | H8 := H8
-              . clear H16 H14 H13 H10 H9 H7
-                exfalso
-                omega
-              . obtain H10 | H10 := H10
-                . clear H7 H9 H14 H15 H16 H8
-                  exfalso
-                  omega
-                . obtain ⟨H17, H18⟩ := H8
-                  obtain ⟨H19, H20⟩ := H10
-                  have H21 := H14 H19
-                  clear H7 H9 H13 H14 H15 H16 H17 H18 H19
-                  exfalso
-                  omega
-        . simp at *
-          obtain ⟨H3, H4⟩ := H
-          obtain ⟨H5, H6⟩ := H0
-          obtain ⟨H7, H8⟩ := H2
-          obtain H1 | H1 := H1
-          . clear H3 H4 H6 H7 H8
-            exfalso
-            omega
-          . obtain ⟨H9, H10⟩ := H1
-            have H11 := H6 H9; clear H6
-            obtain ⟨H12, H13⟩ := H11
-            obtain H10 | H10 := H10
-            . clear H13 H9 H8 H7 H5 H4 H3
-              exfalso
-              omega
-            . obtain ⟨H14, H15⟩ := H10
-              have H16 := H13 H14; clear H13
-              clear H3 H4 H5 H7 H8 H9 H12 H14
-              exfalso
-              omega
-      . split <;> rename_i H2
-        . simp at *
-          obtain ⟨H3, H4⟩ := H1
-          obtain ⟨H5, H6⟩ := H
-          obtain ⟨H7, H8⟩ := H0
-          obtain H2 | H2 := H2
-          . clear H3 H4 H6 H7 H8
-            exfalso
-            omega
-          . clear H3
-            obtain ⟨H9, H10⟩ := H2
-            clear H5
-            have H11 := H6 H9; clear H6
-            obtain ⟨H12, H13⟩ := H11
-            obtain H10 | H10 := H10
-            . clear H4 H7 H8 H9 H13
-              exfalso
-              omega
-            . obtain ⟨H14, H15⟩ := H10
-              have H16 := H13 H14; clear H13
-              clear H14 H12 H9 H8 H7 H4
-              exfalso
-              omega
-        . simp at *
-
-theorem NormalizeXTwice {N} (P: Position N): NormalizeX (NormalizeX P) = NormalizeX P := by
-  unfold NormalizeX
-  split
-  . simp
-  . split
-    . simp
-    . exfalso
-      unfold MirrorX at *
-      cases P
-      simp at *
-      omega
-
-theorem NormalizeYTwice {N} (P: Position N): NormalizeY (NormalizeY P) = NormalizeY P := by
-  unfold NormalizeY
-  split
-  . simp
-  . split
-    . simp
-    . exfalso
-      unfold MirrorY at *
-      cases P
-      simp at *
-      omega
-
-theorem NormalizeDiagTwice {N} (P: Position N): NormalizeDiag (NormalizeDiag P) = NormalizeDiag P := by
-  unfold NormalizeDiag
-  split
-  . simp
-  . split
-    . simp
-    . exfalso
-      unfold MirrorDiag at *
-      cases P
-      simp at *
-      omega
-
--- Working around limitations of omega
-theorem Aux00 {N} (P: Position N):
-  NormalizeY (NormalizeX (MirrorDiag P)) = MirrorDiag (NormalizeY (NormalizeX P)) := by
-  unfold NormalizeX
-  split <;> rename_i H
-  . split <;> rename_i H0
-    . unfold MirrorDiag at *
-      simp at *
-      unfold NormalizeY
-      split <;> rename_i H1
-      . simp at *
-      . simp at *
-    . unfold MirrorDiag at *
-      simp at *
-      unfold MirrorX at *
-      unfold NormalizeY
-      split <;> rename_i H1
-      . simp at *
-        obtain ⟨H2, H3⟩ := H0
-        obtain H1 | H1 := H1
-        . clear H3 H
-          exfalso
-          omega
-        . obtain H | H := H
-          . obtain ⟨H4, H5⟩ := H1
-            clear H2
-            have H6 := H3 H4; clear H3
-            obtain ⟨H7, H8⟩ := H6
-            obtain H5 | H5 := H5
-            . clear H8 H4 H
-              exfalso
-              omega
-            . obtain ⟨H9, H10⟩ := H5
-              have H11 := H8 H9
-              clear H H4 H7 H8 H9
-              exfalso
-              omega
-          . obtain ⟨H4, H5⟩ := H1
-            obtain ⟨H6, H7⟩ := H
-            have H8 := H3 H4; clear H3
-            obtain ⟨H9, H10⟩ := H8
-            obtain H5 | H5 := H5
-            . clear H2 H4 H6 H7 H10
-              exfalso
-              omega
-            . obtain ⟨H11, H12⟩ := H5
-              have H13 := H10 H11; clear H10
-              clear H2 H4 H6 H7 H9 H11
-              exfalso
-              omega
-      . simp at *
-        unfold MirrorY
-        simp at *
-  . unfold MirrorX
-    unfold MirrorDiag at *
-    simp at *
-    split <;> rename_i H0
-    . unfold NormalizeY
-      simp at *
-      split <;> rename_i H1
-      . simp at *
-        split <;> rename_i H2
-        . simp at *
-          clear H1
-          obtain ⟨H3, H4⟩ := H
-          obtain H2 | H2 := H2
-          . clear H0 H4
-            exfalso
-            omega
-          . obtain ⟨H5, H6⟩ := H2
-            have H7 := H4 H5; clear H4
-            obtain ⟨H8, H9⟩ := H7
-            obtain H6 | H6 := H6
-            . clear H9 H5 H3 H0
-              exfalso
-              omega
-            . obtain ⟨H10, H11⟩ := H6
-              have H12 := H9 H10; clear H9
-              clear H10 H8 H5 H3 H0
-              exfalso
-              omega
-        . unfold MirrorY
-          simp
-      . simp at *
-        split <;> rename_i H2
-        . simp at *
-          obtain ⟨H3, H4⟩ := H
-          obtain ⟨H5, H6⟩ := H1
-          obtain H0 | H0 := H0
-          . sorry
-          . sorry
-        . sorry
-    . sorry
-
 
 theorem tiny_omega (N A: Nat): A < N → N - 1 - (N - 1 - A) = A := by omega
 theorem tiny_omega_0 (A B: Nat): A = B → B = A := by omega
@@ -737,28 +386,86 @@ theorem Thm {N} (P1 P2: Position N): SamePosition P1 P2 ↔ Normalize P1 = Norma
                   clear H4
                   have H8 := H5 H6; clear H5
                   obtain ⟨H9, H10⟩ := H8
-
-
-                  sorry
-              . sorry
+                  obtain H7 | H7 := H7
+                  . clear H H0 H6 H10
+                    exfalso
+                    omega
+                  . obtain ⟨H11, H12⟩ := H7
+                    have H13 := H10 H11; clear H10
+                    clear H H0 H6 H9 H11
+                    exfalso
+                    omega
+              . simp at *
+                clear H1 H2 H3
+                rw [tiny_omega _ _ DC6] at H
+                rw [tiny_omega _ _ DC4] at H
+                rw [tiny_omega _ _ DC2] at H
+                obtain H | H := H
+                . obtain H0 | H0 := H0
+                  . exfalso
+                    omega
+                  . obtain ⟨H1, H2⟩ := H0
+                    clear H2
+                    exfalso
+                    omega
+                . obtain ⟨H1, H2⟩ := H
+                  obtain H0 | H0 := H0
+                  . exfalso
+                    clear H2
+                    omega
+                  . obtain ⟨H3, H4⟩ := H0
+                    clear H3
+                    obtain H2 | H2 := H2
+                    . obtain H4 | H4 := H4
+                      . clear H1
+                        exfalso
+                        omega
+                      . obtain ⟨H5, H6⟩ := H4
+                        clear H1 H6
+                        exfalso
+                        omega
+                    . obtain ⟨H5, H6⟩ := H2
+                      obtain H4 | H4 := H4
+                      . clear H1 H6
+                        exfalso
+                        omega
+                      . obtain ⟨H7, H8⟩ := H4
+                        have H9: N - 1 - WRy = WRy := by
+                          clear H1 H5 H7
+                          omega
+                        trivial
+        . simp at *
+          unfold NormalizeX at *
+          simp at *
+          split <;> rename_i H1
+          . simp at *
+          . split at H <;> rename_i H2
+            . simp at *
+              split at H0 <;> rename_i H3
+              . unfold MirrorX
+                simp at *
+              . unfold MirrorX
+                simp at *
+            . split at H0 <;> rename_i H3
+              . unfold MirrorX at *
+                simp at *
+              . unfold MirrorX at *
+                simp at *
+      . simp at *
+        unfold NormalizeX at *
+        simp at *
+        split at H <;> rename_i H1
+        . simp at *
+          split <;> rename_i H2
+          . simp at *
+            split -- doesn't work :(
+            . sorry
+            . sorry
+          . sorry
         . sorry
-      . sorry
-
-
-    . unfold Normalize
-      rw [H]
-      rw [SwapNormalizeXAndNormalizeY]
-      rw [NormalizeYMirrorY]
-      rw [<- SwapNormalizeXAndNormalizeY]
-      rw [NormalizeXMirrorX]
-    . unfold Normalize
-      rw [H]
-      clear H
-
-      sorry
-    . unfold Normalize
-      rw [H]
-      sorry
+    . sorry
+    . sorry
+    . sorry
     . sorry
     . sorry
   . sorry
