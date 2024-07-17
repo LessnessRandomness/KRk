@@ -1,4 +1,5 @@
 import KRk.Definitions
+import Mathlib.Tactic.Tauto
 
 def MirrorX {N} (P: Position N): Position N :=
   Position.mk (N - 1 - P.WKx) P.WKy (N - 1 - P.WRx) P.WRy (N - 1 - P.BKx) P.BKy P.Turn
@@ -1079,11 +1080,163 @@ theorem Thm {N} (P1 P2: Position N): SamePosition P1 P2 ↔ Normalize P1 = Norma
               rw [tiny_omega _ _ DC6] at *
               simp
               clear H2 H1
-
-              sorry
-            . sorry
+              obtain ⟨H1, H2⟩ := H
+              obtain ⟨H3, H4⟩ := H0
+              have H5: BKx = N - 1 - BKx := by
+                clear H2 H4
+                omega
+              have H6: N - 1 - BKx = BKx := by
+                rw [Eq.comm]
+                assumption
+              clear H1 H3
+              have H7 := H4 H5; clear H4 H5
+              have H8 := H2 H6; clear H2 H6
+              obtain ⟨H9, H10⟩ := H7
+              obtain ⟨H11, H12⟩ := H8
+              have H13: WKx = N - 1 - WKx := by
+                clear H10 H12
+                omega
+              have H14: N - 1 - WKx = WKx := by
+                rw [Eq.comm]
+                assumption
+              clear H9 H11
+              have H15 := H10 H13; clear H10 H13
+              have H16 := H12 H14; clear H12 H14
+              exfalso
+              omega
+            . simp at *
+              rw [tiny_omega _ _ DC1] at *
+              rw [tiny_omega _ _ DC2] at *
+              rw [tiny_omega _ _ DC3] at *
+              rw [tiny_omega _ _ DC4] at *
+              rw [tiny_omega _ _ DC5] at *
+              rw [tiny_omega _ _ DC6] at *
+              obtain ⟨H3, H4⟩ := H
+              obtain ⟨H5, H6⟩ := H0
+              clear H1 H2
+              have H7: BKx = N - 1 - BKx := by
+                clear H4 H6
+                omega
+              have H8: N - 1 - BKx = BKx := by
+                rw [Eq.comm]
+                assumption
+              clear H3 H5
+              have H9 := H4 H8; clear H4 H8
+              have H10 := H6 H7; clear H6 H7
+              obtain ⟨H11, H12⟩ := H9
+              obtain ⟨H13, H14⟩ := H10
+              have H15: WKx = N - 1 - WKx := by
+                clear H12 H14
+                omega
+              have H16: N - 1 - WKx = WKx := by
+                rw [Eq.comm]
+                assumption
+              clear H11 H13
+              have H17 := H12 H16; clear H12 H16
+              have H18 := H14 H15; clear H14 H15
+              exfalso
+              omega
     . sorry
     . sorry
     . sorry
     . sorry
-  . sorry
+  . intro H
+    unfold SamePosition
+    unfold Normalize at *
+    unfold NormalizeX at *
+    unfold NormalizeY at *
+    unfold NormalizeDiag at *
+    split at H <;> (rename_i H0; clear H0) <;>
+    split at H <;> (rename_i H0; clear H0) <;>
+    split at H <;> (rename_i H0; clear H0) <;>
+    split at H <;> (rename_i H0; clear H0) <;>
+    split at H <;> (rename_i H0; clear H0) <;>
+    split at H <;> (rename_i H0; clear H0)
+    . tauto
+    . tauto
+    . tauto
+    . tauto
+    . tauto
+    . tauto
+    . tauto
+    . tauto
+    . have H0: P1 = MirrorDiag P2 := by
+        rw [<- H]
+        rw [MirrorDiagTwice]
+      tauto
+    . have H0: P1 = P2 := by
+        rw [<- MirrorDiagTwice P1, <- MirrorDiagTwice P2]
+        rw [H]
+      tauto
+    . have H0: P1 = MirrorDiag (MirrorY P2) := by
+        rw [<- H]
+        rw [MirrorDiagTwice]
+      tauto
+    . have H0: P1 = MirrorY P2 := by
+        rw [<- MirrorDiagTwice P1]
+        rw [H]
+        rw [MirrorDiagTwice]
+      tauto
+    . have H0: P1 = MirrorDiag (MirrorX P2) := by
+        rw [<- MirrorDiagTwice P1]
+        rw [H]
+      tauto
+    . have H0: P1 = MirrorX P2 := by
+        rw [<- MirrorDiagTwice P1]
+        rw [H]
+        rw [MirrorDiagTwice]
+      tauto
+    . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
+        rw [<- MirrorDiagTwice P1]
+        rw [H]
+      tauto
+    . have H0: P1 = MirrorY (MirrorX P2) := by
+        rw [<- MirrorDiagTwice P1]
+        rw [H]
+        rw [MirrorDiagTwice]
+      tauto
+    . have H0: P1 = MirrorY P2 := by
+        rw [<- MirrorYTwice P1]
+        rw [H]
+      tauto
+    .
+      sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
+    . sorry
