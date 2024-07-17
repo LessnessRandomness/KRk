@@ -41,6 +41,26 @@ def MirrorDiagTwice {N} (P: Position N): MirrorDiag (MirrorDiag P) = P := by
   unfold MirrorDiag
   simp at *
 
+def MirrorXYSwap {N} (P: Position N): MirrorX (MirrorY P) = MirrorY (MirrorX P) := by
+  cases P
+  unfold MirrorX
+  unfold MirrorY
+  simp
+
+def MirrorDiagXSwap {N} (P: Position N): MirrorDiag (MirrorX P) = MirrorY (MirrorDiag P) := by
+  cases P
+  unfold MirrorX
+  unfold MirrorY
+  unfold MirrorDiag
+  simp
+
+def MirrorDiagYSwap {N} (P: Position N): MirrorDiag (MirrorY P) = MirrorX (MirrorDiag P) := by
+  cases P
+  unfold MirrorX
+  unfold MirrorY
+  unfold MirrorDiag
+  simp
+
 def SamePositionSymmAux {N} (P1 P2: Position N): SamePosition P1 P2 → SamePosition P2 P1 := by
   intro h
   obtain h | h | h | h | h | h | h | h := h
@@ -55,38 +75,29 @@ def SamePositionSymmAux {N} (P1 P2: Position N): SamePosition P1 P2 → SamePosi
     rw [MirrorYTwice]
   . cases h
     right; right; right; left
-    unfold MirrorX at *
-    unfold MirrorY at *
-    cases P2
-    simp at *
-    omega
+    rw [MirrorXYSwap]
+    rw [MirrorYTwice]
+    rw [MirrorXTwice]
   . cases h
     right; right; right; right; left
     rw [MirrorDiagTwice]
   . cases h
     right; right; right; right; right; right; left
-    unfold MirrorX at *
-    unfold MirrorY at *
-    unfold MirrorDiag at *
-    cases P2
-    simp at *
-    omega
+    rw [MirrorDiagYSwap]
+    rw [MirrorDiagTwice]
+    rw [MirrorXTwice]
   . cases h
     right; right; right; right; right; left
-    unfold MirrorX at *
-    unfold MirrorY at *
-    unfold MirrorDiag at *
-    cases P2
-    simp at *
-    omega
+    rw [MirrorDiagXSwap]
+    rw [MirrorDiagTwice]
+    rw [MirrorYTwice]
   . cases h
     right; right; right; right; right; right; right
-    unfold MirrorX at *
-    unfold MirrorY at *
-    unfold MirrorDiag at *
-    cases P2
-    simp at *
-    omega
+    rw [MirrorDiagYSwap]
+    rw [MirrorDiagXSwap]
+    rw [MirrorDiagTwice]
+    rw [MirrorYTwice]
+    rw [MirrorXTwice]
 
 def SamePositionSymm {N} (P1 P2: Position N): SamePosition P1 P2 ↔ SamePosition P2 P1 := by
   constructor
@@ -1199,15 +1210,52 @@ theorem Thm {N} (P1 P2: Position N): SamePosition P1 P2 ↔ Normalize P1 = Norma
         rw [<- MirrorYTwice P1]
         rw [H]
       tauto
-    .
-      sorry
-    . sorry
-    . sorry
-    . sorry
-    . sorry
-    . sorry
-    . sorry
-    . sorry
+    . have H0: P1 = MirrorDiag (MirrorX P2) := by
+        rw [<- MirrorYTwice P1]
+        rw [H]
+        rw [MirrorDiagXSwap]
+      tauto
+    . have H0: P1 = P2 := by
+        rw [<- MirrorYTwice P1]
+        rw [H]
+        rw [MirrorYTwice]
+      tauto
+    . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
+        rw [<- MirrorYTwice P1]
+        rw [H]
+        rw [MirrorDiagYSwap (MirrorX P2)]
+        rw [MirrorDiagXSwap]
+        rw [MirrorXYSwap]
+        rw [MirrorDiagYSwap]
+      tauto
+    . have H0: P1 = MirrorY (MirrorX P2) := by
+        rw [<- MirrorYTwice P1]
+        rw [H]
+      tauto
+    . have H0: P1 = MirrorDiag P2 := by
+        rw [<- MirrorYTwice P1]
+        rw [H]
+        rw [MirrorDiagXSwap]
+        rw [MirrorYTwice]
+      tauto
+    . have H0: P1 = MirrorX P2 := by
+        rw [<- MirrorYTwice P1]
+        rw [H]
+        rw [MirrorYTwice]
+      tauto
+    . have H0: P1 = MirrorDiag (MirrorY P2) := by
+        rw [<- MirrorYTwice P1]
+        rw [H]
+        rw [<- MirrorDiagXSwap]
+        rw [MirrorXYSwap]
+        rw [MirrorXTwice]
+      tauto
+    . have H0: P1 = MirrorDiag (MirrorX P2) := by
+        rw [<- H]
+        rw [MirrorDiagYSwap]
+        rw [MirrorXTwice]
+        rw [MirrorDiagTwice]
+      tauto
     . sorry
     . sorry
     . sorry
