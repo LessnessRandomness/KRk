@@ -830,10 +830,258 @@ theorem Thm {N} (P1 P2: Position N): SamePosition P1 P2 ↔ Normalize P1 = Norma
               rw [tiny_omega _ _ DC2] at *
               rw [tiny_omega _ _ DC4] at *
               rw [tiny_omega _ _ DC6] at *
+              obtain H2 | H2 := H2
+              . obtain H1 | H1 := H1
+                . exfalso
+                  omega
+                . obtain ⟨H3, H4⟩ := H1
+                  clear H4
+                  exfalso
+                  omega
+              . obtain ⟨H3, H4⟩ := H2
+                obtain H1 | H1 := H1
+                . clear H4
+                  exfalso
+                  omega
+                . obtain ⟨H5, H6⟩ := H1
+                  clear H3
+                  obtain H4 | H4 := H4
+                  . obtain H6 | H6 := H6
+                    . clear H5
+                      exfalso
+                      omega
+                    . obtain ⟨H7, H8⟩ := H6
+                      clear H5 H8
+                      exfalso
+                      omega
+                  . obtain ⟨H7, H8⟩ := H4
+                    obtain H6 | H6 := H6
+                    . clear H5 H8
+                      exfalso
+                      omega
+                    . obtain ⟨H9, H10⟩ := H6
+                      clear H7
+                      have H11: N - 1 - WRy = WRy := by
+                        clear H5 H9
+                        omega
+                      clear H8 H10
+                      trivial
+            . simp
+          . simp at *
+            split <;> rename_i H2
+            . simp at *
+              rw [tiny_omega _ _ DC2]
+              rw [tiny_omega _ _ DC4]
+              rw [tiny_omega _ _ DC6]
+              simp
+            . simp at *
+              clear H H0
+              rw [tiny_omega _ _ DC2] at *
+              rw [tiny_omega _ _ DC4] at *
+              rw [tiny_omega _ _ DC6] at *
+              obtain ⟨H3, H4⟩ := H2
+              obtain ⟨H5, H6⟩ := H1
+              have H7: BKy = N - 1 - BKy := by
+                clear H4 H6
+                omega
+              have H8: N - 1 - BKy = BKy := by
+                rw [Eq.comm]
+                assumption
+              clear H3 H5
+              have H9 := H4 H7; clear H4 H7
+              have H10 := H6 H8; clear H6 H8
+              obtain ⟨H11, H12⟩ := H9
+              obtain ⟨H13, H14⟩ := H10
+              have H15: WKy = N - 1 - WKy := by
+                clear H12 H14
+                omega
+              have H16: N - 1 - WKy = WKy := by
+                rw [Eq.comm]
+                assumption
+              clear H13 H11
+              have H17 := H12 H15; clear H12 H15
+              have H18 := H14 H16; clear H14 H16
+              exfalso
+              omega
+      . unfold MirrorX at *
+        simp at *
+        split <;> rename_i H0
+        . unfold NormalizeY at *
+          unfold MirrorY at *
+          simp at *
+          split <;> rename_i H1
+          . split <;> rename_i H2
+            . simp
+              rw [tiny_omega _ _ DC1] at *
+              rw [tiny_omega _ _ DC2] at *
+              rw [tiny_omega _ _ DC3] at *
+              rw [tiny_omega _ _ DC4] at *
+              rw [tiny_omega _ _ DC5] at *
+              rw [tiny_omega _ _ DC6] at *
+              simp
+              clear H H0
+              obtain H1 | H1 := H1
+              . obtain H2 | H2 := H2
+                . exfalso
+                  omega
+                . obtain ⟨H3, H4⟩ := H2
+                  clear H4
+                  exfalso
+                  omega
+              . obtain ⟨H3, H4⟩ := H1
+                obtain H2 | H2 := H2
+                . clear H4
+                  exfalso
+                  omega
+                . obtain ⟨H5, H6⟩ := H2
+                  clear H5
+                  obtain H4 | H4 := H4
+                  . obtain H6 | H6 := H6
+                    . clear H3
+                      exfalso
+                      omega
+                    . obtain ⟨H7, H8⟩ := H6
+                      clear H8 H3
+                      exfalso
+                      omega
+                  . obtain ⟨H7, H8⟩ := H4
+                    obtain H6 | H6 := H6
+                    . clear H3 H8
+                      exfalso
+                      omega
+                    . obtain ⟨H9, H10⟩ := H6
+                      clear H9
+                      have H11: N - 1 - WRy = WRy := by
+                        clear H3 H7
+                        omega
+                      clear H8 H10
+                      trivial
+            . simp
+              rw [tiny_omega _ _ DC1]
+              rw [tiny_omega _ _ DC3]
+              rw [tiny_omega _ _ DC5]
+              simp
+          . split <;> rename_i H2
+            . simp at *
+              rw [tiny_omega _ _ DC1]
+              rw [tiny_omega _ _ DC2]
+              rw [tiny_omega _ _ DC3]
+              rw [tiny_omega _ _ DC4]
+              rw [tiny_omega _ _ DC5]
+              rw [tiny_omega _ _ DC6]
+              simp
+            . simp at *
+              rw [tiny_omega _ _ DC1] at *
+              rw [tiny_omega _ _ DC2] at *
+              rw [tiny_omega _ _ DC3] at *
+              rw [tiny_omega _ _ DC4] at *
+              rw [tiny_omega _ _ DC5] at *
+              rw [tiny_omega _ _ DC6] at *
+              simp
+              clear H H0
+              obtain ⟨H3, H4⟩ := H1
+              obtain ⟨H5, H6⟩ := H2
+              have H7: BKy = N - 1 - BKy := by
+                clear H4 H6
+                omega
+              have H8: N - 1 - BKy = BKy := by
+                rw [Eq.comm]
+                assumption
+              clear H3 H5
+              have H9 := H4 H8; clear H4 H8
+              have H10 := H6 H7; clear H6 H7
+              obtain ⟨H11, H12⟩ := H9
+              obtain ⟨H13, H14⟩ := H10
+              have H15: WKy = N - 1 - WKy := by
+                clear H12 H14
+                omega
+              have H16: N - 1 - WKy = WKy := by
+                rw [Eq.comm]
+                assumption
+              clear H11 H13
+              have H17 := H12 H16; clear H12 H16
+              have H18 := H14 H15; clear H14 H15
+              exfalso
+              omega
+        . unfold NormalizeY at *
+          unfold MirrorY at *
+          simp at *
+          split <;> rename_i H1
+          . split <;> rename_i H2
+            . simp at *
+              rw [tiny_omega _ _ DC1] at *
+              rw [tiny_omega _ _ DC2] at *
+              rw [tiny_omega _ _ DC3] at *
+              rw [tiny_omega _ _ DC4] at *
+              rw [tiny_omega _ _ DC5] at *
+              rw [tiny_omega _ _ DC6] at *
+              obtain ⟨H3, H4⟩ := H
+              obtain ⟨H5, H6⟩ := H0
+              have H8: N - 1 - BKx = BKx := by
+                clear H1 H2 H4 H6
+                omega
+              have H9: BKx = N - 1 - BKx := by
+                rw [Eq.comm]
+                assumption
+              clear H3 H5
+              have H10 := H4 H8; clear H4 H8
+              have H11 := H6 H9; clear H6 H9
+              obtain ⟨H12, H13⟩ := H10
+              obtain ⟨H14, H15⟩ := H11
+              have H16: N - 1 - WKx = WKx := by
+                clear H13 H15 H1 H2
+                omega
+              have H17: WKx = N - 1 - WKx := by
+                rw [Eq.comm]
+                assumption
+              clear H12 H14
+              have H18 := H13 H16; clear H13 H16
+              have H19 := H15 H17; clear H15 H17
+              clear H1 H2
+              exfalso
+              omega
+            . simp at *
+              rw [tiny_omega _ _ DC1] at *
+              rw [tiny_omega _ _ DC3] at *
+              rw [tiny_omega _ _ DC5] at *
+              clear H1 H2
+              obtain ⟨H1, H2⟩ := H
+              obtain ⟨H3, H4⟩ := H0
+              have H5: BKx = N - 1 - BKx := by
+                clear H2 H4
+                omega
+              have H6: N - 1 - BKx = BKx := by
+                rw [Eq.comm]
+                assumption
+              clear H1 H3
+              have H7 := H2 H6; clear H2 H6
+              have H8 := H4 H5; clear H4 H5
+              obtain ⟨H9, H10⟩ := H7
+              obtain ⟨H11, H12⟩ := H8
+              have H13: WKx = N - 1 - WKx := by
+                clear H10 H12
+                omega
+              have H14: N - 1 - WKx = WKx := by
+                rw [Eq.comm]
+                omega
+              clear H9 H11
+              have H15 := H10 H14; clear H10 H14
+              have H16 := H12 H13; clear H12 H13
+              exfalso
+              omega
+          . split <;> rename_i H2
+            . simp at *
+              rw [tiny_omega _ _ DC1] at *
+              rw [tiny_omega _ _ DC2] at *
+              rw [tiny_omega _ _ DC3] at *
+              rw [tiny_omega _ _ DC4] at *
+              rw [tiny_omega _ _ DC5] at *
+              rw [tiny_omega _ _ DC6] at *
+              simp
+              clear H2 H1
+
               sorry
             . sorry
-          . sorry
-      . sorry
     . sorry
     . sorry
     . sorry
