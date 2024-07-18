@@ -1147,284 +1147,412 @@ theorem Thm {N} (P1 P2: Position N): SamePosition P1 P2 ↔ Normalize P1 = Norma
               have H18 := H14 H15; clear H14 H15
               exfalso
               omega
+    . cases P2; rename_i WKx WKy WRx WRy BKx BKy Turn DC
+      obtain ⟨DC1, DC2, DC3, DC4, DC5, DC6⟩ := DC
+      unfold Normalize
+      unfold NormalizeDiag
+      unfold MirrorDiag
+      split <;> rename_i H
+      . unfold NormalizeX at *
+        simp at *
+        split <;> rename_i H0
+        . split at H <;> rename_i H1
+          . split <;> rename_i H2
+            . split <;> rename_i H3
+              . unfold NormalizeY at *
+                split at H <;> rename_i H4
+                . clear H0
+                  split at H3 <;> rename_i H5
+                  . sorry
+                  . sorry
+                . sorry
+              . sorry
+            . sorry
+          . sorry
+        . sorry
+      . sorry
     . sorry
     . sorry
     . sorry
-    . sorry
-  . intro H
-    unfold SamePosition
-    unfold Normalize at *
-    unfold NormalizeX at *
-    unfold NormalizeY at *
-    unfold NormalizeDiag at *
-    split at H <;> (rename_i H0; clear H0) <;>
-    split at H <;> (rename_i H0; clear H0) <;>
-    split at H <;> (rename_i H0; clear H0) <;>
-    split at H <;> (rename_i H0; clear H0) <;>
-    split at H <;> (rename_i H0; clear H0) <;>
-    split at H <;> (rename_i H0; clear H0)
-    . tauto
-    . tauto
-    . tauto
-    . tauto
-    . tauto
-    . tauto
-    . tauto
-    . tauto
-    . have H0: P1 = MirrorDiag P2 := by
-        rw [<- H]
-        rw [MirrorDiagTwice]
-      tauto
-    . have H0: P1 = P2 := by
-        rw [<- MirrorDiagTwice P1, <- MirrorDiagTwice P2]
-        rw [H]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorY P2) := by
-        rw [<- H]
-        rw [MirrorDiagTwice]
-      tauto
-    . have H0: P1 = MirrorY P2 := by
-        rw [<- MirrorDiagTwice P1]
-        rw [H]
-        rw [MirrorDiagTwice]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorX P2) := by
-        rw [<- MirrorDiagTwice P1]
-        rw [H]
-      tauto
-    . have H0: P1 = MirrorX P2 := by
-        rw [<- MirrorDiagTwice P1]
-        rw [H]
-        rw [MirrorDiagTwice]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
-        rw [<- MirrorDiagTwice P1]
-        rw [H]
-      tauto
-    . have H0: P1 = MirrorY (MirrorX P2) := by
-        rw [<- MirrorDiagTwice P1]
-        rw [H]
-        rw [MirrorDiagTwice]
-      tauto
-    . have H0: P1 = MirrorY P2 := by
-        rw [<- MirrorYTwice P1]
-        rw [H]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorX P2) := by
-        rw [<- MirrorYTwice P1]
-        rw [H]
-        rw [MirrorDiagXSwap]
-      tauto
-    . have H0: P1 = P2 := by
-        rw [<- MirrorYTwice P1]
-        rw [H]
-        rw [MirrorYTwice]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
-        rw [<- MirrorYTwice P1]
-        rw [H]
-        rw [MirrorDiagYSwap (MirrorX P2)]
-        rw [MirrorDiagXSwap]
-        rw [MirrorXYSwap]
-        rw [MirrorDiagYSwap]
-      tauto
-    . have H0: P1 = MirrorY (MirrorX P2) := by
-        rw [<- MirrorYTwice P1]
-        rw [H]
-      tauto
-    . have H0: P1 = MirrorDiag P2 := by
-        rw [<- MirrorYTwice P1]
-        rw [H]
-        rw [MirrorDiagXSwap]
-        rw [MirrorYTwice]
-      tauto
-    . have H0: P1 = MirrorX P2 := by
-        rw [<- MirrorYTwice P1]
-        rw [H]
-        rw [MirrorYTwice]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorY P2) := by
-        rw [<- MirrorYTwice P1]
-        rw [H]
-        rw [<- MirrorDiagXSwap]
-        rw [MirrorXYSwap]
-        rw [MirrorXTwice]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorX P2) := by
-        rw [<- H]
-        rw [MirrorDiagYSwap]
-        rw [MirrorXTwice]
-        rw [MirrorDiagTwice]
-      tauto
-    . have H0: P1 = MirrorY P2 := by
-        rw [<- MirrorYTwice P1]
-        rw [<- MirrorDiagTwice (MirrorY P1)]
-        rw [H]
-        rw [MirrorDiagTwice]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
-        rw [<- MirrorYTwice P1]
-        rw [<- MirrorDiagTwice (MirrorY P1)]
-        rw [H]
-        rw [<- MirrorDiagXSwap]
-        rw [MirrorXYSwap]
-      tauto
-    . have H0: P1 = P2 := by
-        rw [<- MirrorYTwice P1]
-        rw [<- MirrorDiagTwice (MirrorY P1)]
-        rw [H]
-        rw [MirrorDiagTwice]
-        rw [MirrorYTwice]
-      tauto
-    . have H0: P1 = MirrorDiag P2 := by
-        rw [<- MirrorXTwice P2]
-        rw [<- H]
-        rw [MirrorDiagYSwap]
-        rw [MirrorXTwice]
-        rw [MirrorDiagTwice]
-      tauto
-    . have H0: P1 = MirrorY (MirrorX P2) := by
-        rw [<- MirrorYTwice P1]
-        rw [<- MirrorDiagTwice (MirrorY P1)]
-        rw [H]
-        rw [MirrorDiagTwice]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorY P2) := by
-        rw [<- MirrorYTwice P1]
-        rw [<- MirrorDiagTwice (MirrorY P1)]
-        rw [H]
-        rw [<- MirrorDiagXSwap]
-        rw [MirrorXYSwap]
-        rw [MirrorXTwice]
-      tauto
-    . have H0: P1 = MirrorX P2 := by
-        rw [<- MirrorYTwice P1]
-        rw [<- MirrorDiagTwice (MirrorY P1)]
-        rw [H]
-        rw [MirrorDiagTwice]
-        rw [MirrorYTwice]
-      tauto
-    . have H0: P1 = MirrorX P2 := by
-        rw [<- H]
-        rw [MirrorXTwice]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorY P2) := by
-        rw [<- MirrorXTwice P1]
-        rw [H]
-        rw [MirrorDiagYSwap]
-      tauto
-    . have H0: P1 = MirrorY (MirrorX P2) := by
-        rw [<- MirrorXTwice P1]
-        rw [H]
-        rw [MirrorXYSwap]
-      tauto
-    . have H0: P1 = MirrorDiag P2 := by
-        rw [<- MirrorXTwice P1]
-        rw [H]
-        rw [MirrorDiagYSwap]
-        rw [MirrorXTwice]
-      tauto
-    . have H0: P1 = P2 := by
-        rw [<- MirrorXTwice P1]
-        rw [H]
-        rw [MirrorXTwice]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
-        rw [<- MirrorXTwice P1]
-        rw [H]
-        rw [<- MirrorDiagYSwap (MirrorX P2)]
-      tauto
-    . have H0: P1 = MirrorY P2 := by
-        rw [<- MirrorXTwice P1]
-        rw [H]
-        rw [MirrorXYSwap]
-        rw [MirrorXTwice]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorX P2) := by
-        rw [<- MirrorXTwice P1]
-        rw [H]
-        rw [<- MirrorDiagYSwap]
-        rw [MirrorYTwice]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorY P2) := by
-        rw [<- MirrorXTwice P1]
-        rw [<- MirrorDiagTwice (MirrorX P1)]
-        rw [H]
-        rw [MirrorDiagYSwap]
-      tauto
-    . have H0: P1 = MirrorX P2 := by
-        rw [<- MirrorXTwice P1]
-        rw [<- MirrorDiagTwice (MirrorX P1)]
-        rw [H]
-        rw [MirrorDiagTwice]
-      tauto
-    . have H0: P1 = MirrorDiag P2 := by
-        rw [<- MirrorYTwice P2]
-        rw [<- H]
-        rw [MirrorDiagYSwap]
-        rw [MirrorDiagTwice]
-        rw [MirrorXTwice]
-      tauto
-    . have H0: P1 = MirrorY (MirrorX P2) := by
-        rw [<- MirrorXTwice P1]
-        rw [<- MirrorDiagTwice (MirrorX P1)]
-        rw [H]
-        rw [MirrorDiagTwice]
-        rw [MirrorXYSwap]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
-        rw [<- H]
-        rw [MirrorDiagYSwap]
-        rw [MirrorDiagTwice]
-        rw [MirrorXTwice]
-      tauto
-    . have H0: P1 = P2 := by
-        rw [<- MirrorXTwice P1]
-        rw [<- MirrorDiagTwice (MirrorX P1)]
-        rw [H]
-        rw [MirrorDiagTwice]
-        rw [MirrorXTwice]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorX P2) := by
-        rw [<- MirrorXTwice P1]
-        rw [<- MirrorDiagTwice (MirrorX P1)]
-        rw [H]
-        rw [<- MirrorDiagYSwap]
-        rw [MirrorYTwice]
-      tauto
-    . have H0: P1 = MirrorY P2 := by
-        rw [<- MirrorXTwice P1]
-        rw [<- MirrorDiagTwice (MirrorX P1)]
-        rw [H]
-        rw [MirrorDiagTwice]
-        rw [MirrorXYSwap]
-        rw [MirrorXTwice]
-      tauto
-    . have H0: P1 = MirrorY (MirrorX P2) := by
-        rw [<- H]
-        rw [MirrorXYSwap]
-        rw [MirrorYTwice]
-        rw [MirrorXTwice]
-      tauto
-    . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
-        rw [<- MirrorXTwice P1]
-        rw [<- MirrorYTwice (MirrorX P1)]
-        rw [H]
-        rw [<- MirrorDiagXSwap]
-        rw [<- MirrorDiagYSwap]
-      tauto
-    .
-      sorry
-    . sorry
-    . sorry
-    . sorry
-    . sorry
-    . sorry
-    . sorry
-    . sorry
-    . sorry
-    . sorry
-    . sorry
-    . sorry
-    . sorry
-    . sorry
+  . sorry
+    -- intro H
+    -- unfold SamePosition
+    -- unfold Normalize at *
+    -- unfold NormalizeX at *
+    -- unfold NormalizeY at *
+    -- unfold NormalizeDiag at *
+    -- split at H <;> (rename_i H0; clear H0) <;>
+    -- split at H <;> (rename_i H0; clear H0) <;>
+    -- split at H <;> (rename_i H0; clear H0) <;>
+    -- split at H <;> (rename_i H0; clear H0) <;>
+    -- split at H <;> (rename_i H0; clear H0) <;>
+    -- split at H <;> (rename_i H0; clear H0)
+    -- . tauto
+    -- . tauto
+    -- . tauto
+    -- . tauto
+    -- . tauto
+    -- . tauto
+    -- . tauto
+    -- . tauto
+    -- . have H0: P1 = MirrorDiag P2 := by
+    --     rw [<- H]
+    --     rw [MirrorDiagTwice]
+    --   tauto
+    -- . have H0: P1 = P2 := by
+    --     rw [<- MirrorDiagTwice P1, <- MirrorDiagTwice P2]
+    --     rw [H]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorY P2) := by
+    --     rw [<- H]
+    --     rw [MirrorDiagTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorY P2 := by
+    --     rw [<- MirrorDiagTwice P1]
+    --     rw [H]
+    --     rw [MirrorDiagTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorX P2) := by
+    --     rw [<- MirrorDiagTwice P1]
+    --     rw [H]
+    --   tauto
+    -- . have H0: P1 = MirrorX P2 := by
+    --     rw [<- MirrorDiagTwice P1]
+    --     rw [H]
+    --     rw [MirrorDiagTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
+    --     rw [<- MirrorDiagTwice P1]
+    --     rw [H]
+    --   tauto
+    -- . have H0: P1 = MirrorY (MirrorX P2) := by
+    --     rw [<- MirrorDiagTwice P1]
+    --     rw [H]
+    --     rw [MirrorDiagTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorY P2 := by
+    --     rw [<- MirrorYTwice P1]
+    --     rw [H]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorX P2) := by
+    --     rw [<- MirrorYTwice P1]
+    --     rw [H]
+    --     rw [MirrorDiagXSwap]
+    --   tauto
+    -- . have H0: P1 = P2 := by
+    --     rw [<- MirrorYTwice P1]
+    --     rw [H]
+    --     rw [MirrorYTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
+    --     rw [<- MirrorYTwice P1]
+    --     rw [H]
+    --     rw [MirrorDiagYSwap (MirrorX P2)]
+    --     rw [MirrorDiagXSwap]
+    --     rw [MirrorXYSwap]
+    --     rw [MirrorDiagYSwap]
+    --   tauto
+    -- . have H0: P1 = MirrorY (MirrorX P2) := by
+    --     rw [<- MirrorYTwice P1]
+    --     rw [H]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag P2 := by
+    --     rw [<- MirrorYTwice P1]
+    --     rw [H]
+    --     rw [MirrorDiagXSwap]
+    --     rw [MirrorYTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorX P2 := by
+    --     rw [<- MirrorYTwice P1]
+    --     rw [H]
+    --     rw [MirrorYTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorY P2) := by
+    --     rw [<- MirrorYTwice P1]
+    --     rw [H]
+    --     rw [<- MirrorDiagXSwap]
+    --     rw [MirrorXYSwap]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorX P2) := by
+    --     rw [<- H]
+    --     rw [MirrorDiagYSwap]
+    --     rw [MirrorXTwice]
+    --     rw [MirrorDiagTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorY P2 := by
+    --     rw [<- MirrorYTwice P1]
+    --     rw [<- MirrorDiagTwice (MirrorY P1)]
+    --     rw [H]
+    --     rw [MirrorDiagTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
+    --     rw [<- MirrorYTwice P1]
+    --     rw [<- MirrorDiagTwice (MirrorY P1)]
+    --     rw [H]
+    --     rw [<- MirrorDiagXSwap]
+    --     rw [MirrorXYSwap]
+    --   tauto
+    -- . have H0: P1 = P2 := by
+    --     rw [<- MirrorYTwice P1]
+    --     rw [<- MirrorDiagTwice (MirrorY P1)]
+    --     rw [H]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorYTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag P2 := by
+    --     rw [<- MirrorXTwice P2]
+    --     rw [<- H]
+    --     rw [MirrorDiagYSwap]
+    --     rw [MirrorXTwice]
+    --     rw [MirrorDiagTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorY (MirrorX P2) := by
+    --     rw [<- MirrorYTwice P1]
+    --     rw [<- MirrorDiagTwice (MirrorY P1)]
+    --     rw [H]
+    --     rw [MirrorDiagTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorY P2) := by
+    --     rw [<- MirrorYTwice P1]
+    --     rw [<- MirrorDiagTwice (MirrorY P1)]
+    --     rw [H]
+    --     rw [<- MirrorDiagXSwap]
+    --     rw [MirrorXYSwap]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorX P2 := by
+    --     rw [<- MirrorYTwice P1]
+    --     rw [<- MirrorDiagTwice (MirrorY P1)]
+    --     rw [H]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorYTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorX P2 := by
+    --     rw [<- H]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorY P2) := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [H]
+    --     rw [MirrorDiagYSwap]
+    --   tauto
+    -- . have H0: P1 = MirrorY (MirrorX P2) := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [H]
+    --     rw [MirrorXYSwap]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag P2 := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [H]
+    --     rw [MirrorDiagYSwap]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = P2 := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [H]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [H]
+    --     rw [<- MirrorDiagYSwap (MirrorX P2)]
+    --   tauto
+    -- . have H0: P1 = MirrorY P2 := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [H]
+    --     rw [MirrorXYSwap]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorX P2) := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [H]
+    --     rw [<- MirrorDiagYSwap]
+    --     rw [MirrorYTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorY P2) := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [<- MirrorDiagTwice (MirrorX P1)]
+    --     rw [H]
+    --     rw [MirrorDiagYSwap]
+    --   tauto
+    -- . have H0: P1 = MirrorX P2 := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [<- MirrorDiagTwice (MirrorX P1)]
+    --     rw [H]
+    --     rw [MirrorDiagTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag P2 := by
+    --     rw [<- MirrorYTwice P2]
+    --     rw [<- H]
+    --     rw [MirrorDiagYSwap]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorY (MirrorX P2) := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [<- MirrorDiagTwice (MirrorX P1)]
+    --     rw [H]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorXYSwap]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
+    --     rw [<- H]
+    --     rw [MirrorDiagYSwap]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = P2 := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [<- MirrorDiagTwice (MirrorX P1)]
+    --     rw [H]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorX P2) := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [<- MirrorDiagTwice (MirrorX P1)]
+    --     rw [H]
+    --     rw [<- MirrorDiagYSwap]
+    --     rw [MirrorYTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorY P2 := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [<- MirrorDiagTwice (MirrorX P1)]
+    --     rw [H]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorXYSwap]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorY (MirrorX P2) := by
+    --     rw [<- H]
+    --     rw [MirrorXYSwap]
+    --     rw [MirrorYTwice]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [<- MirrorYTwice (MirrorX P1)]
+    --     rw [H]
+    --     rw [<- MirrorDiagXSwap]
+    --     rw [<- MirrorDiagYSwap]
+    --   tauto
+    -- . have H0: P1 = MirrorX P2 := by
+    --     rw [<- MirrorYTwice P2]
+    --     rw [<- H]
+    --     rw [MirrorYTwice]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorX P2) := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [<- MirrorYTwice (MirrorX P1)]
+    --     rw [H]
+    --     rw [<- MirrorDiagXSwap]
+    --     rw [<- MirrorDiagYSwap]
+    --     rw [MirrorXYSwap]
+    --     rw [MirrorYTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorY P2 := by
+    --     rw [<- MirrorXTwice P2]
+    --     rw [<- H]
+    --     rw [MirrorXYSwap]
+    --     rw [MirrorXTwice]
+    --     rw [MirrorYTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorY P2) := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [<- MirrorYTwice (MirrorX P1)]
+    --     rw [H]
+    --     rw [<- MirrorDiagXSwap]
+    --     rw [<- MirrorDiagYSwap]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = P2 := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [<- MirrorYTwice (MirrorX P1)]
+    --     rw [H]
+    --     rw [MirrorYTwice]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag P2 := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [<- MirrorYTwice (MirrorX P1)]
+    --     rw [H]
+    --     rw [<- MirrorDiagXSwap]
+    --     rw [<- MirrorDiagYSwap]
+    --     rw [MirrorXYSwap]
+    --     rw [MirrorYTwice]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorY (MirrorX P2)) := by
+    --     rw [<- H]
+    --     rw [MirrorDiagYSwap]
+    --     rw [MirrorDiagYSwap]
+    --     rw [MirrorXTwice]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorY (MirrorX P2) := by
+    --     rw [<- MirrorDiagTwice P2]
+    --     rw [<- H]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorXYSwap]
+    --     rw [MirrorYTwice]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorX P2) := by
+    --     rw [<- MirrorYTwice P2]
+    --     rw [<- H]
+    --     rw [MirrorDiagXSwap]
+    --     rw [MirrorDiagYSwap]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorXYSwap]
+    --     rw [MirrorXTwice]
+    --     rw [MirrorYTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorX P2 := by
+    --     rw [<- MirrorYTwice P2]
+    --     rw [<- MirrorDiagTwice (MirrorY P2)]
+    --     rw [<- H]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorYTwice]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag (MirrorY P2) := by
+    --     rw [<- MirrorXTwice P2]
+    --     rw [<- H]
+    --     rw [<- MirrorDiagYSwap]
+    --     rw [<- MirrorDiagXSwap]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorYTwice]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorY P2 := by
+    --     rw [<- MirrorXTwice P2]
+    --     rw [<- MirrorDiagTwice (MirrorX P2)]
+    --     rw [<- H]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorXYSwap]
+    --     rw [MirrorYTwice]
+    --     rw [MirrorXTwice]
+    --   tauto
+    -- . have H0: P1 = MirrorDiag P2 := by
+    --     rw [<- MirrorXTwice P2]
+    --     rw [<- MirrorYTwice (MirrorX P2)]
+    --     rw [<- H]
+    --     rw [MirrorDiagXSwap]
+    --     rw [MirrorDiagYSwap]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorXYSwap]
+    --     rw [MirrorXTwice]
+    --     rw [MirrorYTwice]
+    --   tauto
+    -- . have H0: P1 = P2 := by
+    --     rw [<- MirrorXTwice P1]
+    --     rw [<- MirrorYTwice (MirrorX P1)]
+    --     rw [<- MirrorDiagTwice (MirrorY (MirrorX P1))]
+    --     rw [H]
+    --     rw [MirrorDiagTwice]
+    --     rw [MirrorYTwice]
+    --     rw [MirrorXTwice]
+    --   tauto
