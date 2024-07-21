@@ -215,8 +215,6 @@ theorem NormalizeXNormalizeY {N} (P: Position N): NormalizeX (NormalizeY P) = No
   · unfold MirrorX MirrorY at *; simp at *
 
 
-theorem tiny_omega (N A: Nat): A < N → N - 1 - (N - 1 - A) = A := by omega
-
 theorem SamePositionAndNormalize {N} (P1 P2: Position N): SamePosition P1 P2 ↔ Normalize P1 = Normalize P2 := by
   constructor
   . intro H
@@ -640,3 +638,13 @@ theorem SamePositionAndNormalize {N} (P1 P2: Position N): SamePosition P1 P2 ↔
         rw [MirrorYTwice]
         rw [MirrorXTwice]
       tauto
+
+
+theorem NormalizedPositionIsSamePosition {N} (P: Position N):
+  SamePosition (Normalize P) P := by
+  unfold SamePosition
+  unfold Normalize NormalizeX NormalizeY NormalizeDiag
+  split <;> (rename_i H0; clear H0) <;>
+  split <;> (rename_i H0; clear H0) <;>
+  split <;> (rename_i H0; clear H0) <;>
+  tauto
